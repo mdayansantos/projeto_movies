@@ -1,0 +1,40 @@
+.movie-card {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  padding: 16px;
+  max-width: 540px;
+  margin: 24px auto;
+}
+
+.movie-poster img {
+  width: 120px;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.movie-info {
+  color: #fff;
+  text-align: left;
+}
+
+.movie-title {
+  margin: 0 0 8px;
+  font-size: 1.3rem;
+}
+
+.movie-year,
+.movie-rating,
+.movie-description {
+  margin: 4px 0;
+  line-height: 1.4;
+}
+
+.movie-rating {
+  font-weight: 600;
+}
