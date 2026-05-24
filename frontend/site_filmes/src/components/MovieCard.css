@@ -7,8 +7,10 @@
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 12px;
   padding: 16px;
-  max-width: 540px;
-  margin: 24px auto;
+  width: 100%;
+  max-width: 100%;
+  min-height: 220px;
+  margin: 0;
 }
 
 .movie-poster img {
@@ -21,6 +23,10 @@
 .movie-info {
   color: #fff;
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100%;
 }
 
 .movie-title {
@@ -31,10 +37,28 @@
 .movie-year,
 .movie-rating,
 .movie-description {
-  margin: 4px 0;
-  line-height: 1.4;
+  margin: 6px 0;
+  line-height: 1.5;
 }
 
 .movie-rating {
   font-weight: 600;
+}
+
+.expand-button {
+  align-self: flex-start;
+  margin-top: 12px;
+  padding: 8px 12px;
+  border: 1px solid rgba(96, 165, 250, 0.9);
+  border-radius: 999px;
+  background: rgba(96, 165, 250, 0.12);
+  color: #f8fafc;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.expand-button:hover {
+  background: rgba(96, 165, 250, 0.25);
+  transform: translateY(-1px);
 }
