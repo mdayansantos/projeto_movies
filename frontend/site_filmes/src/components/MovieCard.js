@@ -1,5 +1,5 @@
+
 import React, { useState } from 'react';
-import './MovieCard.css';
 
 const MovieCard = ({ movie }) => {
   const [expanded, setExpanded] = useState(false);

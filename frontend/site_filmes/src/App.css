@@ -41,9 +41,10 @@
 }
 
 main {
-  width: min(1200px, calc(100% - 32px));
+  width: min(100%, calc(100% - 40px));
+  max-width: 1400px;
   margin: 0 auto 40px;
-  padding: 24px 0;
+  padding: 24px 20px;
 }
 
 .status-message {
@@ -58,8 +59,8 @@ main {
 
 .movie-list {
   display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   align-items: start;
 }
 

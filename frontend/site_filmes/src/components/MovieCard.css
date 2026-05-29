@@ -48,17 +48,32 @@
 .expand-button {
   align-self: flex-start;
   margin-top: 12px;
-  padding: 8px 12px;
-  border: 1px solid rgba(96, 165, 250, 0.9);
+  padding: 8px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
   border-radius: 999px;
-  background: rgba(96, 165, 250, 0.12);
-  color: #f8fafc;
+  background: linear-gradient(90deg, rgba(96,165,250,0.95), rgba(59,130,246,0.95));
+  box-shadow: 0 6px 18px rgba(59,130,246,0.12), 0 1px 2px rgba(0,0,0,0.12);
+  color: #0b1220;
   font-size: 0.95rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.12s ease;
 }
 
 .expand-button:hover {
-  background: rgba(96, 165, 250, 0.25);
-  transform: translateY(-1px);
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 10px 30px rgba(59,130,246,0.16), 0 2px 6px rgba(0,0,0,0.14);
+}
+
+.expand-button:active {
+  transform: translateY(0) scale(0.995);
+  opacity: 0.98;
+}
+
+.expand-button:focus-visible {
+  outline: 3px solid rgba(59,130,246,0.22);
+  outline-offset: 3px;
 }
