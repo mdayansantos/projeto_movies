@@ -1,73 +1,53 @@
-import { useEffect, useState } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
-import MovieCard from './components/MovieCard';
+import MovieDetail from './components/MovieDetail';
+import HomePage from './pages/HomePage';
+import NotFoundPage from './pages/NotFoundPage';
+import useMovies from './hooks/useMovies';
 
 function App() {
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const {
+    movies,
+    loading,
+    error,
+    searchTerm,
+    setSearchTerm,
+    selectedCategory,
+    setSelectedCategory,
+    categories,
+    retry,
+    loadMore,
+    page,
+    totalPages,
+  } = useMovies();
 
-  useEffect(() => {
-    const apiKey = process.env.REACT_APP_TMDB_API_KEY;
-    if (!apiKey) {
-      setError('Chave da TMDB não encontrada. Verifique seu .env.');
-      setLoading(false);
-      return;
-    }
-
-    const url = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=pt-BR&page=1`;
-
-    fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Erro ao buscar filmes na TMDB');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setMovies(data.results || []);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setError('Não foi possível carregar os filmes.');
-        setLoading(false);
-      });
-  }, []);
+  const navigate = useNavigate();
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Site de Filmes</h1>
-        <p>Filmes populares carregados da API TMDB.</p>
-      </header>
-      <main>
-        {loading && <p className="status-message">Carregando filmes...</p>}
-        {error && <p className="status-message error">{error}</p>}
-        {!loading && !error && movies.length === 0 && (
-          <p className="status-message">Nenhum filme encontrado.</p>
-        )}
-
-        {!loading && !error && movies.length > 0 && (
-          <section className="movie-list">
-            {movies.map((movie) => (
-              <MovieCard
-                key={movie.id}
-                movie={{
-                  title: movie.title,
-                  year: movie.release_date ? movie.release_date.slice(0, 4) : '—',
-                  rating: movie.vote_average ? movie.vote_average.toFixed(1) : '—',
-                  description: movie.overview,
-                  posterUrl: movie.poster_path
-                    ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
-                    : 'https://via.placeholder.com/150x225?text=Sem+imagem',
-                }}
-              />
-            ))}
-          </section>
-        )}
-      </main>
-    </div>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <HomePage
+            movies={movies}
+            loading={loading}
+            error={error}
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            selectedCategory={selectedCategory}
+            setSelectedCategory={setSelectedCategory}
+            categories={categories}
+            retry={retry}
+            loadMore={loadMore}
+            page={page}
+            totalPages={totalPages}
+            onSelectMovie={(id) => navigate(`/movie/${id}`)}
+          />
+        }
+      />
+      <Route path="/movie/:id" element={<MovieDetail movies={movies} />} />
+      <Route path="*" element={<NotFoundPage />} />
+    </Routes>
   );
 }
 
